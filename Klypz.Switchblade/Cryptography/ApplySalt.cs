@@ -1,16 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Klypz.Switchblade.Cryptography
 {
+
+    /// <summary>
+    /// Algorítimo que gera uma string a partir de uma chave ('salt') visando o previnir a identificação das senhas utilizadas
+    /// </summary>
     public class ApplySalt
     {
         private string input = "", salt = "";
-
+        
+        /// <param name="input">Senha do usuário</param>
+        /// <param name="salt">Chave de Salt</param>
         public ApplySalt(string input, string salt)
         {
             this.input = input;
@@ -18,7 +21,7 @@ namespace Klypz.Switchblade.Cryptography
         }
 
         /// <summary>
-        /// Método para increntar a segurança de inversã de criptograda
+        /// Método para increntar a segurança de inversão de criptografia
         /// </summary>
         /// <param name="hashType">Padrão de criptografia utilizada</param>
         /// <param name="iterations">Número de vezes que a iteração utiliza a chave</param>

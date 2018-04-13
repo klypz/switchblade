@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Klypz.Switchblade.Cryptography
 {
+    /// <summary>
+    /// <para>Criptografa string utilizando os Algorítmos</para>
+    /// <para>MD5, SHA1, SHA256, SHA384, SHA512</para>
+    /// </summary>
     public sealed class HashString
     {
         private string input = "";
@@ -16,6 +16,11 @@ namespace Klypz.Switchblade.Cryptography
             this.input = input;
         }
 
+        /// <summary>
+        /// Converte o input em hash string selecionado
+        /// </summary>
+        /// <param name="hashStringType">Tipo de Algorítmo de hash</param>
+        /// <returns>Retorna string criptografada</returns>
         public string GetHashString(HashStringType hashStringType)
         {
             HashAlgorithm hashAlgorithm = null;

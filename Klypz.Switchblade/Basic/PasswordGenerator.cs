@@ -2,10 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Klypz.Switchblade.Basic
 {
+    /// <summary>
+    /// Gera uma string aleatória com base nas instruções
+    /// <code>
+    /// //Gera uma senha com 14 caracteres e todos os caracteres habilitados
+    /// string password = PasswordGenerator.NewPassword()
+    /// //Gera uma senha com 20 caracteres e todos os caracteres habilitados
+    /// string password = PasswordGenerator.NewPassword(20)
+    /// //Gera uma senha com 14 caracteres e não inclui caracteres mai
+    /// string password = PasswordGenerator.NewPassword(upperChar: false)
+    /// </code>
+    /// </summary>
     public static class PasswordGenerator
     {
         /// <summary>

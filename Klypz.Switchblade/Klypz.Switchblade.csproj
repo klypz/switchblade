@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Basic\DateTimeExtensions.cs" />
     <Compile Include="Basic\PasswordGenerator.cs" />
+    <Compile Include="Basic\StringExtension.cs" />
     <Compile Include="Cryptography\ApplySalt.cs" />
     <Compile Include="Cryptography\CryptoHelper.cs" />
     <Compile Include="Cryptography\HashString.cs" />

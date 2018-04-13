@@ -5,9 +5,13 @@ using System.Text;
 
 namespace Klypz.Switchblade.Cryptography
 {
+    /// <summary>
+    /// Algorítmo simétrico para criptografar uma string
+    /// </summary>
     public class SymmetricEncrypt
     {
         private string secret = "";
+        /// <param name="secret">Chave para criptografar ou descriptografar uma string</param>
         public SymmetricEncrypt(string secret)
         {
             this.secret = secret;
@@ -37,6 +41,11 @@ namespace Klypz.Switchblade.Cryptography
             return cipherTextBytes;
         }
 
+        /// <summary>
+        /// Criptografar uma string
+        /// </summary>
+        /// <param name="input">Texto a ser criptografado</param>
+        /// <returns>Texto criptografado com base em uma chave</returns>
         public string Encrypt(string input)
         {
             byte[] bText = Encoding.Default.GetBytes(input);
@@ -53,6 +62,11 @@ namespace Klypz.Switchblade.Cryptography
             return cipherText;
         }
 
+        /// <summary>
+        /// Descriptografa uma string
+        /// </summary>
+        /// <param name="textEncrypted">Texto criptografado</param>
+        /// <returns>Texto descriptografado com base em uma chave</returns>
         public string Decrypt(string textEncrypted)
         {
             byte[] bText = Convert.FromBase64String(textEncrypted);
