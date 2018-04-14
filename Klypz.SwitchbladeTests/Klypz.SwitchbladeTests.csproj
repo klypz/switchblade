@@ -74,11 +74,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Klypz.Switchblade\Klypz.Switchblade.csproj">
-      <Project>{ADCFD73A-6B11-47FF-A8CD-B49A2C15A480}</Project>
+      <Project>{adcfd73a-6b11-47ff-a8cd-b49a2c15a480}</Project>
       <Name>Klypz.Switchblade</Name>
     </ProjectReference>
   </ItemGroup>
