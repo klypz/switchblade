@@ -71,6 +71,7 @@
     <Compile Include="Cryptography\CryptoHelperTests.cs" />
     <Compile Include="Cryptography\HashStringTests.cs" />
     <Compile Include="Cryptography\SymmetricEncryptTests.cs" />
+    <Compile Include="List\ResultListTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

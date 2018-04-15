@@ -60,6 +60,8 @@
     <Compile Include="Cryptography\HashString.cs" />
     <Compile Include="Cryptography\HashStringType.cs" />
     <Compile Include="Cryptography\SymmetricEncrypt.cs" />
+    <Compile Include="List\IListExtension.cs" />
+    <Compile Include="List\ResultList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
