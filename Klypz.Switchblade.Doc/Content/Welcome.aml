@@ -12,35 +12,27 @@
 				<para>Para entender o projeto não tem segredo. Facilitamos o que estava complexo e extendemos o que existia.</para>
         <list class="bullet">
 					<listItem>
-						<para><localUri>Klypz.Switchblade.Cryptography</localUri> - relativas a criptografia.</para>
+						<para><legacyBold>Klypz.Switchblade.Cryptography</legacyBold> - relativas a criptografia.</para>
 					</listItem>
 
 					<listItem>
-						<para>The <localUri>.\media</localUri> folder - Place images in this folder that you will reference
-from conceptual content using <codeInline>medialLink</codeInline> or <codeInline>mediaLinkInline</codeInline>
-elements.  If you will not have any images in the file, you may remove this folder.</para>
+						<para>
+              <legacyBold>Klypz.Switchblade.Extensions</legacyBold> - Conjunto de extensão de classes
+            </para>
 					</listItem>
 
 					<listItem>
-						<para>The <localUri>.\icons</localUri> folder - This contains a default logo for the help file.  You
-may replace it or remove it and the folder if not wanted.  If removed or if you change the file name, update
-the <ui>Transform Args</ui> project properties page by removing or changing the filename in the
-<codeInline>logoFile</codeInline> transform argument.  Note that unlike images referenced from conceptual topics,
-the logo file should have its <legacyBold>BuildAction</legacyBold> property set to <codeInline>Content</codeInline>.</para>
+						<para>
+              <legacyBold>Klypz.Switchblade.Result</legacyBold> - Classes para atender uma padronização de resposta para requisições
+            </para>
 					</listItem>
 
 					<listItem>
-						<para>The <localUri>.\Content</localUri> folder - Use this to store your conceptual topics.  You may
-name the files and organize them however you like.  One suggestion is to lay the files out on disk as you have
-them in the content layout file as shown in this project but the choice is yours.  Files can be added via the
-Solution Explorer or from within the content layout file editor.  Files must appear in the content layout file
-in order to be compiled into the help file.</para>
+						<para>
+              <legacyBold>Klypz.Switchblade.Utility</legacyBold> - Algumas outras funcionalidades
+            </para>
 					</listItem>
 				</list>
-
-				<para>See the <legacyBold>Conceptual Content</legacyBold> topics in the Sandcastle Help File Builder's
-help file for more information.  See the <legacyBold> Sandcastle MAML Guide</legacyBold> for details on Microsoft
-Assistance Markup Language (MAML) which is used to create these topics.</para>
 			</content>
 		</section>
 
