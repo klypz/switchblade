@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Klypz.Switchblade.Basic
+namespace Klypz.Switchblade.Utility
 {
     /// <summary>
     /// Gera uma string aleatória com base nas instruções

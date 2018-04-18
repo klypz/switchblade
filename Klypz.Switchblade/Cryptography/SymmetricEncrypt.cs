@@ -6,12 +6,24 @@ using System.Text;
 namespace Klypz.Switchblade.Cryptography
 {
     /// <summary>
-    /// Algorítmo simétrico para criptografar uma string
+    /// <para>A criptografia simétrica é uma técnica utilizada para que seja possível sua reversão</para>
+    /// <para>Este modelo de criptografia se utiliza de uma chave, também chamada de "Segredo", onde só poderá ser feita a reversão se o mesmo segredo for utilizado</para>
     /// </summary>
+    /// <example>
+    /// <code>
+    ///     SymmetricEncrypt simetric = new SymmetricEncrypt("segredo");
+    ///     string result = simetric.Encrypt("Aqui um texto para ser criptografado");
+    ///     //J6WAxNrdUCgtkbSIbrjU5Zt0XcxdDjFiZT5vKqEKNwXzvPaLNS+i51ClkAr5fnKbyQymr0kwFiXuKhJVcGDUAw==
+    ///     
+    ///     //Reversão
+    ///     string revert = simetric.Decrypter("J6WAxNrdUCgtkbSIbrjU5Zt0XcxdDjFiZT5vKqEKNwXzvPaLNS+i51ClkAr5fnKbyQymr0kwFiXuKhJVcGDUAw==");
+    ///     //Aqui um texto para ser criptografado
+    /// </code>
+    /// </example>
     public class SymmetricEncrypt
     {
         private string secret = "";
-        /// <param name="secret">Chave para criptografar ou descriptografar uma string</param>
+        /// <param name="secret">Chave ou segredo utilizado para criptografar um texto</param>
         public SymmetricEncrypt(string secret)
         {
             this.secret = secret;
@@ -42,7 +54,7 @@ namespace Klypz.Switchblade.Cryptography
         }
 
         /// <summary>
-        /// Criptografar uma string
+        /// Criptografar um texto com base na chave
         /// </summary>
         /// <param name="input">Texto a ser criptografado</param>
         /// <returns>Texto criptografado com base em uma chave</returns>
@@ -63,7 +75,7 @@ namespace Klypz.Switchblade.Cryptography
         }
 
         /// <summary>
-        /// Descriptografa uma string
+        /// Reverter criptografia com base na chave
         /// </summary>
         /// <param name="textEncrypted">Texto criptografado</param>
         /// <returns>Texto descriptografado com base em uma chave</returns>

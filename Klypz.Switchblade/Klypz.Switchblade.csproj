@@ -31,6 +31,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <DocumentationFile>bin\Release\Klypz.Switchblade.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Nuget|AnyCPU'">
     <OutputPath>bin\Nuget\</OutputPath>
@@ -52,17 +53,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Basic\DateTimeExtensions.cs" />
-    <Compile Include="Basic\PasswordGenerator.cs" />
-    <Compile Include="Basic\StringExtension.cs" />
-    <Compile Include="Cryptography\ApplySalt.cs" />
+    <Compile Include="Cryptography\NamespaceDoc.cs" />
+    <Compile Include="Extensions\DateTimeExtension.cs" />
+    <Compile Include="Extensions\EnumerableExtension.cs" />
+    <Compile Include="Extensions\NamespaceDoc.cs" />
+    <Compile Include="Utility\NamespaceDoc.cs" />
+    <Compile Include="Utility\PasswordGenerator.cs" />
+    <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="Utility\ApplySalt.cs" />
     <Compile Include="Cryptography\CryptoHelper.cs" />
     <Compile Include="Cryptography\HashString.cs" />
     <Compile Include="Cryptography\HashStringType.cs" />
     <Compile Include="Cryptography\SymmetricEncrypt.cs" />
-    <Compile Include="List\IListExtension.cs" />
-    <Compile Include="List\ResultList.cs" />
+    <Compile Include="Result\NamespaceDoc.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Result\Result.cs" />
+    <Compile Include="Result\ResultList.cs" />
+    <Compile Include="Result\ResultType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

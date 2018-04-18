@@ -66,13 +66,14 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Basic\PasswordGeneratorTests.cs" />
     <Compile Include="Cryptography\ApplySaltTests.cs" />
     <Compile Include="Cryptography\CryptoHelperTests.cs" />
     <Compile Include="Cryptography\HashStringTests.cs" />
     <Compile Include="Cryptography\SymmetricEncryptTests.cs" />
-    <Compile Include="List\ResultListTests.cs" />
+    <Compile Include="Extensions\DateTimeExtensionTests.cs" />
+    <Compile Include="Extensions\StringExtensionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\ApplySaltTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

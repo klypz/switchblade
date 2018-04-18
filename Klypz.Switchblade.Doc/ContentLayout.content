@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Topics>
+  <Topic id="e7eeed86-58b0-4da9-bde7-7ef913e2cd92" visible="True" isDefault="true" title="Bem Vindo ao Klypz.Switchblade">
+    <HelpKeywords>
+      <HelpKeyword index="K" term="Bem Vindo" />
+    </HelpKeywords>
+  </Topic>
+  <Topic id="f0f9e2dd-82cf-4a30-b5c9-d7f7df18efba" visible="True" isExpanded="true" title="Version History">
+    <HelpKeywords>
+      <HelpKeyword index="K" term="version, history" />
+    </HelpKeywords>
+    <Topic id="6d9413d1-52f9-49cc-b2b5-c0876a73b46c" visible="True" isSelected="true" title="Version 1.0.0.0">
+      <HelpKeywords>
+        <HelpKeyword index="K" term="version, 1.0.0.0" />
+      </HelpKeywords>
+    </Topic>
+  </Topic>
+</Topics>

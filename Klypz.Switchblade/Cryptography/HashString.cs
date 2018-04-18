@@ -4,7 +4,7 @@ using System.Text;
 namespace Klypz.Switchblade.Cryptography
 {
     /// <summary>
-    /// <para>Criptografa string utilizando os Algorítmos</para>
+    /// <para>Criptografa string utilizando os Algorítimos</para>
     /// <para>MD5, SHA1, SHA256, SHA384, SHA512</para>
     /// </summary>
     public sealed class HashString
@@ -17,9 +17,9 @@ namespace Klypz.Switchblade.Cryptography
         }
 
         /// <summary>
-        /// Converte o input em hash string selecionado
+        /// Obtém a "Hash" de um texto (input) com base no algorítimo informado
         /// </summary>
-        /// <param name="hashStringType">Tipo de Algorítmo de hash</param>
+        /// <param name="hashStringType">Tipo de Algorítimo de hash</param>
         /// <returns>Retorna string criptografada</returns>
         public string GetHashString(HashStringType hashStringType)
         {

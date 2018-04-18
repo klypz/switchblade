@@ -1,8 +1,14 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Klypz.Switchblade.Utility;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Klypz.Switchblade.Cryptography;
 using System.Data;
 
-namespace Klypz.Switchblade.Cryptography.Tests
+namespace Klypz.Switchblade.Utility.Tests
 {
     [TestClass()]
     public class ApplySaltTests
@@ -224,6 +230,19 @@ namespace Klypz.Switchblade.Cryptography.Tests
         {
             get { return testContextInstance; }
             set { testContextInstance = value; }
+        }
+
+        public void ApplySaltTeste()
+        {
+            for (int i = 0; i < dictionaryTest.Rows.Count; i++)
+            {
+                ApplySalt appsl = new ApplySalt(dictionaryTest.Rows[i]["Chave"].ToString(), dictionaryTest.Rows[i]["SALT"].ToString());
+
+                var st = appsl.Get();
+
+                Assert.AreEqual(dictionaryTest.Rows[i]["WITHSALT"].ToString(), st);
+            }
+            
         }
     }
 }

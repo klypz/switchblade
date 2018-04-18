@@ -2,21 +2,23 @@
 {
     /// <summary>
     /// Métodos rápidos de criptografia de string
-    /// <code>
-    /// //Para converter para MD5
-    /// CryptoHelper.ToMD5("senha")
-    /// //Para converter para SHA256
-    /// CryptoHelper.ToSHA256("senha")
-    /// //Para converter para criptografia simétrica
-    /// CryptoHelper.ToSymmetricEncrypt("senha", "chave")
-    /// //Para converter para descriptografia simétrica
-    /// CryptoHelper.ToSymmetricDecrypt("senha criptografada", "chave")
-    /// </code>
     /// </summary>
+    /// <example>
+    /// <code>
+    ///     //Para converter para MD5
+    ///     CryptoHelper.ToMD5("senha")
+    ///     //Para converter para SHA256
+    ///     CryptoHelper.ToSHA256("senha")
+    ///     //Para converter para criptografia simétrica
+    ///     CryptoHelper.ToSymmetricEncrypt("senha", "chave")
+    ///     //Para fazer a reversão da criptografia simétrica
+    ///     CryptoHelper.ToSymmetricDecrypt("senha criptografada", "chave")
+    /// </code>
+    /// </example>
     public static class CryptoHelper
     {
         /// <summary>
-        /// Cria um string criptografada com o Algorítmo MD5
+        /// Cria um string criptografada com o Algorítimo MD5
         /// </summary>
         /// <param name="self">Texto a ser criptografado</param>
         /// <returns>String criptografada em MD5</returns>
@@ -25,7 +27,7 @@
             return new HashString(self).GetHashString(HashStringType.MD5);
         }
         /// <summary>
-        /// Cria um string criptografada com o Algorítmo SHA1
+        /// Cria um string criptografada com o Algorítimo SHA1
         /// </summary>
         /// <param name="self">Texto a ser criptografado</param>
         /// <returns>String criptografada em SHA1</returns>
@@ -34,7 +36,7 @@
             return new HashString(self).GetHashString(HashStringType.SHA1);
         }
         /// <summary>
-        /// Cria um string criptografada com o Algorítmo SHA256
+        /// Cria um string criptografada com o Algorítimo SHA256
         /// </summary>
         /// <param name="self">Texto a ser criptografado</param>
         /// <returns>String criptografada em SHA256</returns>
@@ -43,7 +45,7 @@
             return new HashString(self).GetHashString(HashStringType.SHA256);
         }
         /// <summary>
-        /// Cria um string criptografada com o Algorítmo SHA384
+        /// Cria um string criptografada com o Algorítimo SHA384
         /// </summary>
         /// <param name="self">Texto a ser criptografado</param>
         /// <returns>String criptografada em SHA384</returns>
@@ -52,7 +54,7 @@
             return new HashString(self).GetHashString(HashStringType.SHA384);
         }
         /// <summary>
-        /// Cria um string criptografada com o Algorítmo SHA512
+        /// Cria um string criptografada com o Algorítimo SHA512
         /// </summary>
         /// <param name="self">Texto a ser criptografado</param>
         /// <returns>String criptografada em SHA512</returns>
@@ -61,7 +63,7 @@
             return new HashString(self).GetHashString(HashStringType.SHA512);
         }
         /// <summary>
-        /// Cria um string criptografada com o Algorítmo Simétrico utilizando uma chave
+        /// Cria um string criptografada com o Algorítimo Simétrico utilizando uma chave
         /// </summary>
         /// <param name="self">Texto a ser criptografado</param>
         /// <param name="secret">Chave de criptografia (Deve ser utilizada a mesma para que seja desfeita)</param>
@@ -71,7 +73,7 @@
             return new SymmetricEncrypt(secret).Encrypt(self);
         }
         /// <summary>
-        /// Cria um string descriptografada com o Algorítmo Simétrico utilizando uma chave
+        /// Cria um string descriptografada com o Algorítimo Simétrico utilizando uma chave
         /// </summary>
         /// <param name="self">Texto a ser descriptografado</param>
         /// <param name="secret">Chave de criptografia (A mesma utilizada na criptografia)</param>
