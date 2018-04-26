@@ -25,18 +25,21 @@ namespace Klypz.Switchblade.Image.Tests
 
             deleteFiles.ToList().ForEach(f => File.Delete(f));
 
-            
+
 
             foreach (var item in files)
             {
                 string[] filesSplit = item.Split('\\');
 
-                System.Drawing.Image image = System.Drawing.Image.GetPixelFormatSize(.FromFile(item);
+
+                System.Drawing.Image image = System.Drawing.Image.FromFile(item);
                 var imageResult = image.HorizontalScale(300);
-
                 imageResult.Save(resultPath + "\\" + filesSplit[filesSplit.Length - 1]);
+                imageResult = image.VerticalScale(300);
+                imageResult.Save(resultPath + "\\v_" + filesSplit[filesSplit.Length - 1]);
+                imageResult = image.ToSquare(300);
+                imageResult.Save(resultPath + "\\sq_" + filesSplit[filesSplit.Length - 1]);
             }
-
         }
     }
 }
