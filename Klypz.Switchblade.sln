@@ -9,6 +9,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Klypz.SwitchbladeTests", "K
 EndProject
 Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Klypz.Switchblade.Doc", "Klypz.Switchblade.Doc\Klypz.Switchblade.Doc.shfbproj", "{9E02D0A0-E3F6-420C-9373-8C6EF7DDE654}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Switchblade", "Switchblade", "{59B9B0FA-A2F3-4952-A1E2-1B0C1195427D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Image", "Image", "{BA8EF172-F741-4F4F-8FA8-9524A970E69B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Klypz.Switchblade.Image", "Klypz.Switchblade.Image\Klypz.Switchblade.Image.csproj", "{E6B1AE51-4729-4439-A015-B602468A4E5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Klypz.Switchblade.ImageTests", "Klypz.Switchblade.ImageTests\Klypz.Switchblade.ImageTests.csproj", "{298DA21A-F909-4692-BD2A-CA45A59CCCCA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,9 +42,28 @@ Global
 		{9E02D0A0-E3F6-420C-9373-8C6EF7DDE654}.Nuget|Any CPU.Build.0 = Release|Any CPU
 		{9E02D0A0-E3F6-420C-9373-8C6EF7DDE654}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E02D0A0-E3F6-420C-9373-8C6EF7DDE654}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6B1AE51-4729-4439-A015-B602468A4E5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6B1AE51-4729-4439-A015-B602468A4E5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6B1AE51-4729-4439-A015-B602468A4E5C}.Nuget|Any CPU.ActiveCfg = Release|Any CPU
+		{E6B1AE51-4729-4439-A015-B602468A4E5C}.Nuget|Any CPU.Build.0 = Release|Any CPU
+		{E6B1AE51-4729-4439-A015-B602468A4E5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6B1AE51-4729-4439-A015-B602468A4E5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{298DA21A-F909-4692-BD2A-CA45A59CCCCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{298DA21A-F909-4692-BD2A-CA45A59CCCCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{298DA21A-F909-4692-BD2A-CA45A59CCCCA}.Nuget|Any CPU.ActiveCfg = Release|Any CPU
+		{298DA21A-F909-4692-BD2A-CA45A59CCCCA}.Nuget|Any CPU.Build.0 = Release|Any CPU
+		{298DA21A-F909-4692-BD2A-CA45A59CCCCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{298DA21A-F909-4692-BD2A-CA45A59CCCCA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ADCFD73A-6B11-47FF-A8CD-B49A2C15A480} = {59B9B0FA-A2F3-4952-A1E2-1B0C1195427D}
+		{7765CE2C-F968-402D-8E1F-54E9E2F4806D} = {59B9B0FA-A2F3-4952-A1E2-1B0C1195427D}
+		{9E02D0A0-E3F6-420C-9373-8C6EF7DDE654} = {59B9B0FA-A2F3-4952-A1E2-1B0C1195427D}
+		{E6B1AE51-4729-4439-A015-B602468A4E5C} = {BA8EF172-F741-4F4F-8FA8-9524A970E69B}
+		{298DA21A-F909-4692-BD2A-CA45A59CCCCA} = {BA8EF172-F741-4F4F-8FA8-9524A970E69B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {360649CE-4B1D-47FA-9078-290BB24837C7}
