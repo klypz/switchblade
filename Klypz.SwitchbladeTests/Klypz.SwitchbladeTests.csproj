@@ -76,15 +76,13 @@
     <Compile Include="Utility\ApplySaltTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Klypz.Switchblade\Klypz.Switchblade.csproj">
       <Project>{adcfd73a-6b11-47ff-a8cd-b49a2c15a480}</Project>
       <Name>Klypz.Switchblade</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

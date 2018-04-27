@@ -1,13 +1,14 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 
 namespace Klypz.Switchblade.Image
 {
-    public static class ImageUtil
+    public static class ImageExtension
     {
-
         private static RotateFlipType GetOrientationToFlipType(int orientationValue)
         {
             RotateFlipType rotateFlipType = RotateFlipType.RotateNoneFlipNone;
@@ -46,6 +47,11 @@ namespace Klypz.Switchblade.Image
             return rotateFlipType;
         }
 
+        /// <summary>
+        /// <para>Conserta a rotação da imagem de acordo com a rotação original.</para>
+        /// <para>Algumas imagens "importadas" tem a orientação diferente da definida no arquivo, este método conserta.</para>
+        /// </summary>
+        /// <param name="self">Stream de imagem</param>
         public static void FixToOriginalOrientation(this System.Drawing.Image self)
         {
             foreach (var prop in self.PropertyItems)
@@ -62,6 +68,13 @@ namespace Klypz.Switchblade.Image
             }
         }
 
+        /// <summary>
+        /// Redimensiona a imagem proporcionalmente pela largura
+        /// </summary>
+        /// <param name="self">Imagem</param>
+        /// <param name="newWidth">Nova dimensão da largura</param>
+        /// <returns>Cópia da imagem original redimensionada</returns>
+        [Obsolete("Método foi modificado para ResizeScalarByWidth")]
         public static System.Drawing.Image HorizontalScale(this System.Drawing.Image self, int newWidth)
         {
             System.Drawing.Image reself = (System.Drawing.Image)self.Clone();
@@ -89,6 +102,13 @@ namespace Klypz.Switchblade.Image
             return result;
         }
 
+        /// <summary>
+        /// Redimensiona a imagem proporcionalmente pela altura
+        /// </summary>
+        /// <param name="self">Imagem</param>
+        /// <param name="newWidth">Nova dimensão da altura</param>
+        /// <returns>Cópia da imagem original redimensionada</returns>
+        [Obsolete("Método foi modificado para ResizeScalarByHeight")]
         public static System.Drawing.Image VerticalScale(this System.Drawing.Image self, int newHeight)
         {
             System.Drawing.Image reself = (System.Drawing.Image)self.Clone();
@@ -110,6 +130,68 @@ namespace Klypz.Switchblade.Image
                 graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 graphics.DrawImage(reself, new Rectangle(0, 0, wResult, hResult), new Rectangle(0, 0, wSource, hSource), GraphicsUnit.Pixel);
             }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Redimensiona a imagem proporcionalmente pela largura
+        /// </summary>
+        /// <param name="self">Imagem</param>
+        /// <param name="newWidth">Nova dimensão da largura</param>
+        /// <returns>Cópia da imagem original redimensionada</returns>
+        public static System.Drawing.Image ResizeScalarByWidth(this System.Drawing.Image self, int newWidth)
+        {
+            System.Drawing.Image reself = (System.Drawing.Image)self.Clone();
+            reself.FixToOriginalOrientation();
+
+            int wSource = reself.Width;
+            int hSource = reself.Height;
+
+            int wResult = newWidth;
+            int hResult = (hSource * newWidth) / wSource;
+
+            //Criando Bitmap
+            Bitmap result = new Bitmap(wResult, hResult, reself.PixelFormat);
+            result.SetResolution(reself.HorizontalResolution, reself.VerticalResolution);
+
+            using (Graphics graphics = Graphics.FromImage(result))
+            {
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.DrawImage(reself, new Rectangle(0, 0, wResult, hResult), new Rectangle(0, 0, wSource, hSource), GraphicsUnit.Pixel);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Redimensiona a imagem proporcionalmente pela altura
+        /// </summary>
+        /// <param name="self">Imagem</param>
+        /// <param name="newWidth">Nova dimensão da altura</param>
+        /// <returns>Cópia da imagem original redimensionada</returns>
+        public static System.Drawing.Image ResizeScalarByHeight(this System.Drawing.Image self, int newHeight)
+        {
+            System.Drawing.Image reself = (System.Drawing.Image)self.Clone();
+            reself.FixToOriginalOrientation();
+
+            int wSource = reself.Width;
+            int hSource = reself.Height;
+
+            int hResult = newHeight;
+            int wResult = (wSource * newHeight) / hSource;
+
+            //Criando Bitmap
+            Bitmap result = new Bitmap(wResult, hResult, reself.PixelFormat);
+            result.SetResolution(reself.HorizontalResolution, reself.VerticalResolution);
+
+            using (Graphics graphics = Graphics.FromImage(result))
+            {
+                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                graphics.DrawImage(reself, new Rectangle(0, 0, wResult, hResult), new Rectangle(0, 0, wSource, hSource), GraphicsUnit.Pixel);
+            }
+
+            self = result;
 
             return result;
         }
@@ -150,6 +232,35 @@ namespace Klypz.Switchblade.Image
             }
 
             return result;
+        }
+
+        public static string ToBase64(this System.Drawing.Image self)
+        {
+            string base64String = null;
+
+            ImageFormat imageFormat = null;
+
+            var prop = typeof(ImageFormat).GetProperties().ToList().FirstOrDefault(f =>
+                f.PropertyType == typeof(ImageFormat)
+                && ((ImageFormat)f.GetValue(null, null)).Guid == self.RawFormat.Guid);
+
+            if (prop != null)
+            {
+                imageFormat = ((ImageFormat)prop.GetValue(null, null));
+            }
+            else
+            {
+                imageFormat = ImageFormat.Jpeg;
+            }
+
+            using (MemoryStream m = new MemoryStream())
+            {
+                self.Save(m, imageFormat);
+                byte[] imageBytes = m.ToArray();
+
+                base64String = Convert.ToBase64String(imageBytes);
+            }
+            return base64String;
         }
     }
 }
