@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -234,33 +235,52 @@ namespace Klypz.Switchblade.Image
             return result;
         }
 
-        public static string ToBase64(this System.Drawing.Image self)
+        public static string ToBase64(this System.Drawing.Image self, ImageFormat format = null)
         {
             string base64String = null;
 
-            ImageFormat imageFormat = null;
-
-            var prop = typeof(ImageFormat).GetProperties().ToList().FirstOrDefault(f =>
-                f.PropertyType == typeof(ImageFormat)
-                && ((ImageFormat)f.GetValue(null, null)).Guid == self.RawFormat.Guid);
-
-            if (prop != null)
+            if (format == null)
             {
-                imageFormat = ((ImageFormat)prop.GetValue(null, null));
-            }
-            else
-            {
-                imageFormat = ImageFormat.Jpeg;
+                format = GetImageFormat(self.RawFormat);
             }
 
             using (MemoryStream m = new MemoryStream())
             {
-                self.Save(m, imageFormat);
+                self.Save(m, format);
                 byte[] imageBytes = m.ToArray();
 
                 base64String = Convert.ToBase64String(imageBytes);
             }
             return base64String;
+        }
+
+        private static ImageFormat GetImageFormat(ImageFormat imageFormat)
+        {
+            List<Guid> lstFormat = new List<Guid>
+            {
+                ImageFormat.Emf.Guid,
+                ImageFormat.MemoryBmp.Guid
+            };
+
+            if (lstFormat.Any(p => p == imageFormat.Guid))
+            {
+                return ImageFormat.Jpeg;
+            }
+            else
+            {
+                var prop = typeof(ImageFormat).GetProperties().ToList().FirstOrDefault(f =>
+                   f.PropertyType == typeof(ImageFormat)
+                   && ((ImageFormat)f.GetValue(null, null)).Guid == imageFormat.Guid);
+
+                if (prop != null)
+                {
+                    return ((ImageFormat)prop.GetValue(null, null));
+                }
+                else
+                {
+                    return ImageFormat.Jpeg;
+                }
+            }
         }
     }
 }
