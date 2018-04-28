@@ -45,5 +45,11 @@
     <Compile Include="ImageExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Klypz.Switchblade\Klypz.Switchblade.csproj">
+      <Project>{adcfd73a-6b11-47ff-a8cd-b49a2c15a480}</Project>
+      <Name>Klypz.Switchblade</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

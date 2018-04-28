@@ -20,7 +20,7 @@ namespace Klypz.Switchblade.Image.Tests
             string resultPath = "..\\..\\ImgTest\\Result";
 
 
-            string[] files = Directory.GetFiles($"{sourcePath}", "*.jpg");
+            string[] files = Directory.GetFiles(sourcePath, "*.jpg");
             string[] deleteFiles = Directory.GetFiles(resultPath, "*.jpg");
 
             deleteFiles.ToList().ForEach(f => File.Delete(f));

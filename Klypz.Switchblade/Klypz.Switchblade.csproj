@@ -45,11 +45,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +56,9 @@
     <Compile Include="Extensions\DateTimeExtension.cs" />
     <Compile Include="Extensions\EnumerableExtension.cs" />
     <Compile Include="Extensions\NamespaceDoc.cs" />
+    <Compile Include="Utility\AttachmentType.cs" />
+    <Compile Include="Utility\Base64Converter.cs" />
+    <Compile Include="Utility\IAttachmentType.cs" />
     <Compile Include="Utility\NamespaceDoc.cs" />
     <Compile Include="Utility\PasswordGenerator.cs" />
     <Compile Include="Extensions\StringExtension.cs" />

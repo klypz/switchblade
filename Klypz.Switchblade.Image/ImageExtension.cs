@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Klypz.Switchblade.Utility;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -237,50 +238,9 @@ namespace Klypz.Switchblade.Image
 
         public static string ToBase64(this System.Drawing.Image self, ImageFormat format = null)
         {
-            string base64String = null;
-
-            if (format == null)
-            {
-                format = GetImageFormat(self.RawFormat);
-            }
-
-            using (MemoryStream m = new MemoryStream())
-            {
-                self.Save(m, format);
-                byte[] imageBytes = m.ToArray();
-
-                base64String = Convert.ToBase64String(imageBytes);
-            }
-            return base64String;
+            return Base64Converter.ToBase64(self, format);
         }
 
-        private static ImageFormat GetImageFormat(ImageFormat imageFormat)
-        {
-            List<Guid> lstFormat = new List<Guid>
-            {
-                ImageFormat.Emf.Guid,
-                ImageFormat.MemoryBmp.Guid
-            };
-
-            if (lstFormat.Any(p => p == imageFormat.Guid))
-            {
-                return ImageFormat.Jpeg;
-            }
-            else
-            {
-                var prop = typeof(ImageFormat).GetProperties().ToList().FirstOrDefault(f =>
-                   f.PropertyType == typeof(ImageFormat)
-                   && ((ImageFormat)f.GetValue(null, null)).Guid == imageFormat.Guid);
-
-                if (prop != null)
-                {
-                    return ((ImageFormat)prop.GetValue(null, null));
-                }
-                else
-                {
-                    return ImageFormat.Jpeg;
-                }
-            }
-        }
+        
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Klypz.Switchblade.Utility;
+using System;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -72,10 +73,7 @@ namespace Klypz.Switchblade.Extensions
         /// <returns>Base64 reduzida</returns>
         public static string ToBase64(this string self)
         {
-            byte[] bResult = Encoding.UTF8.GetBytes(self);
-            string result = Convert.ToBase64String(bResult);
-
-            return result;
+            return Base64Converter.ToBase64(self);
         }
 
         /// <summary>
