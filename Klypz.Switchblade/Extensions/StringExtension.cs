@@ -73,7 +73,7 @@ namespace Klypz.Switchblade.Extensions
         /// <returns>Base64 reduzida</returns>
         public static string ToBase64(this string self)
         {
-            return Base64Converter.ToBase64(self);
+            return Base64Converter2.ToBase64(self);
         }
 
         /// <summary>

@@ -67,6 +67,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Base64\FinderMimeTypeTests.cs" />
     <Compile Include="Cryptography\ApplySaltTests.cs" />
     <Compile Include="Cryptography\CryptoHelperTests.cs" />
     <Compile Include="Cryptography\HashStringTests.cs" />

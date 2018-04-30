@@ -1,4 +1,4 @@
-﻿using Klypz.Switchblade.Utility;
+﻿using Klypz.Switchblade.Base64;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

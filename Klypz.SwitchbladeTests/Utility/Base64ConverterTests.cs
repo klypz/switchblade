@@ -1,4 +1,5 @@
-﻿using Klypz.Switchblade.Utility;
+﻿using Klypz.Switchblade.Base64;
+using Klypz.Switchblade.Utility;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,9 @@ namespace Klypz.SwitchbladeTests.Utility
                 var a = File.OpenRead(item);
 
                 string s  = Base64Converter.ToBase64(a);
+
+                var t = FinderMimeType.GetMimeType(Convert.FromBase64String(s));
+                var obj = Base64Converter.FromBase64(s, out IMimeType mime);
 
                 File.WriteAllText(resultPath + "\\" + filesSplit[filesSplit.Length - 1].Replace('.', '_') + ".txt", s);
 

@@ -52,13 +52,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base64\Base64Converter.cs" />
+    <Compile Include="Base64\FinderMimeType.cs" />
+    <Compile Include="Base64\IMimeType.cs" />
+    <Compile Include="Base64\MimeType.cs" />
     <Compile Include="Cryptography\NamespaceDoc.cs" />
     <Compile Include="Extensions\DateTimeExtension.cs" />
     <Compile Include="Extensions\EnumerableExtension.cs" />
     <Compile Include="Extensions\NamespaceDoc.cs" />
-    <Compile Include="Utility\AttachmentType.cs" />
-    <Compile Include="Utility\Base64Converter.cs" />
-    <Compile Include="Utility\IAttachmentType.cs" />
     <Compile Include="Utility\NamespaceDoc.cs" />
     <Compile Include="Utility\PasswordGenerator.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
