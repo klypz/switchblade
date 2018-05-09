@@ -20,7 +20,7 @@ namespace Klypz.Switchblade.Base64.Tests
             var a = "renato".ToBase64();
             string sourcePath = "..\\..\\filestest\\input";
             var a2 = File.OpenRead($"{sourcePath}\\SQLQuery1.sql");
-            string s = Base64Converter.ToBase64(a2);
+            string s = Base64Converter.ToBase64String(a2);
 
             var t = FinderMimeType.IsString(Convert.FromBase64String(a));
             t = FinderMimeType.IsString(Convert.FromBase64String(s));

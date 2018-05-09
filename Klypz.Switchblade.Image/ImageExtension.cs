@@ -1,14 +1,12 @@
-﻿using Klypz.Switchblade.Base64;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
 
 namespace Klypz.Switchblade.Image
 {
+    /// <summary>
+    /// Amplia as funcionalidades da classe [System.Drawing.Image]
+    /// </summary>
     public static class ImageExtension
     {
         private static RotateFlipType GetOrientationToFlipType(int orientationValue)
@@ -108,7 +106,7 @@ namespace Klypz.Switchblade.Image
         /// Redimensiona a imagem proporcionalmente pela altura
         /// </summary>
         /// <param name="self">Imagem</param>
-        /// <param name="newWidth">Nova dimensão da altura</param>
+        /// <param name="newHeight">Nova dimensão da altura</param>
         /// <returns>Cópia da imagem original redimensionada</returns>
         [Obsolete("Método foi modificado para ResizeScalarByHeight")]
         public static System.Drawing.Image VerticalScale(this System.Drawing.Image self, int newHeight)
@@ -170,7 +168,7 @@ namespace Klypz.Switchblade.Image
         /// Redimensiona a imagem proporcionalmente pela altura
         /// </summary>
         /// <param name="self">Imagem</param>
-        /// <param name="newWidth">Nova dimensão da altura</param>
+        /// <param name="newHeight">Nova dimensão da altura</param>
         /// <returns>Cópia da imagem original redimensionada</returns>
         public static System.Drawing.Image ResizeScalarByHeight(this System.Drawing.Image self, int newHeight)
         {
@@ -198,6 +196,12 @@ namespace Klypz.Switchblade.Image
             return result;
         }
 
+        /// <summary>
+        /// Redimensiona uma imagem tornando-a "quadrada" cortando as sobras em direção do centro
+        /// </summary>
+        /// <param name="self">Imagem a ser redimensionada</param>
+        /// <param name="newSize">Tamanho dos lados da imagem</param>
+        /// <returns>A imagem redimensionada</returns>
         public static System.Drawing.Image ToSquare(this System.Drawing.Image self, int newSize)
         {
             System.Drawing.Image reself = (System.Drawing.Image)self.Clone();
@@ -235,12 +239,5 @@ namespace Klypz.Switchblade.Image
 
             return result;
         }
-
-        public static string ToBase64(this System.Drawing.Image self, ImageFormat format = null)
-        {
-            return Base64Converter.ToBase64(self, format);
-        }
-
-        
     }
 }

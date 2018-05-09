@@ -22,7 +22,6 @@ namespace Klypz.Switchblade.Extensions.Tests
         public void FromUnixTimeTest()
         {
             DateTime dt = DateTimeExtension.FromUnixTime((long)1420070400000);
-            Assert.Fail();
         }
     }
 }

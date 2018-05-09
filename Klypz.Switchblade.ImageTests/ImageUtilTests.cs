@@ -40,7 +40,7 @@ namespace Klypz.Switchblade.Image.Tests
                 imageResult = image.ToSquare(300);
                 imageResult.Save(resultPath + "\\sq_" + filesSplit[filesSplit.Length - 1]);
 
-                string base64 = imageResult.ToBase64();
+                //string base64 = imageResult.ToBase64();
             }
         }
     }

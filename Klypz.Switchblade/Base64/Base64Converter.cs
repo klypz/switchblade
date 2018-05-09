@@ -34,25 +34,6 @@ namespace Klypz.Switchblade.Base64
             return Convert.ToBase64String(inArray);
         }
 
-        public static string ToBase64String(Image input, ImageFormat format = null)
-        {
-            string base64String = null;
-
-            if (format == null)
-            {
-                format = GetImageFormat(input.RawFormat);
-            }
-
-            using (MemoryStream m = new MemoryStream())
-            {
-                input.Save(m, format);
-                byte[] imageBytes = m.ToArray();
-
-                base64String = Convert.ToBase64String(imageBytes);
-            }
-            return base64String;
-        }
-
         public static object FromBase64String(string input, out IMimeType mime)
         {
             byte[] result = Convert.FromBase64String(input);
@@ -60,7 +41,7 @@ namespace Klypz.Switchblade.Base64
             if (FinderMimeType.IsString(result))
             {
                 mime = new MimeType("#string#", "", null);
-                return Encoding.Default.GetString(result);
+                return Encoding.UTF8.GetString(result);
             }
             else
             {
@@ -71,26 +52,6 @@ namespace Klypz.Switchblade.Base64
             }
 
         }
-
-        #region private conversor
-        private static Image GetImage(byte[] input, IMimeType mimeType)
-        {
-            using (MemoryStream memory = new MemoryStream(input))
-            {
-                Image image = new Bitmap(memory);
-            }
-        }
-
-        private static File GetFile(byte[] input, IMimeType mimeType)
-        {
-
-        }
-
-        private static string GetString(byte[] input, IMimeType mimeType)
-        {
-
-        }
-        #endregion private conversor
 
         private static ImageFormat GetImageFormat(ImageFormat imageFormat)
         {
