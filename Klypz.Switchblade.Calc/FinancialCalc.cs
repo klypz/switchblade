@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.Collections.Generic;
+using System.Linq;
 namespace Klypz.Switchblade.Calc
 {
     /// <summary>
@@ -101,6 +102,36 @@ namespace Klypz.Switchblade.Calc
         public static double GetAmountByDiscountSimple(double listPrice, decimal rate, int time = 1)
         {
             return listPrice * (1 - (Convert.ToDouble(rate) * time));
+        }
+
+
+        /// <summary>
+        /// <para>Realiza o rateio proporcional para composição levando em consideração os dias de atraso e valor principal</para>
+        /// <para>Cada item da composição receberá um valor de juros proporcional</para>
+        /// </summary>
+        /// <typeparam name="T">Tipo de identificador do item da composição do preco</typeparam>
+        /// <param name="pricesComposition">Composição do valor.</param>
+        /// <param name="totalInterestAmount">Valor total do juros. Este deverá ser rateado entre os itens da composição de valor.</param>
+        public static void ApportionmentOfInterestForDaysOfDelay<T>(IEnumerable<PriceComposition<T>> pricesComposition, double totalInterestAmount) where T : struct
+        {
+            double factorReduce = 0.0001;
+
+            if (pricesComposition == null)
+            {
+                throw new ArgumentNullException(nameof(pricesComposition));
+            }
+
+            IEnumerable<PriceComposition<T>> pricesCompositionWithDelay = pricesComposition.Where(p => p.DaysOfDelay > 0);
+
+            double totalAmount = pricesCompositionWithDelay.Sum(s => s.PrincipalAmount);
+            double totalDaysOfDelay = pricesCompositionWithDelay.Sum(s => s.DaysOfDelay);
+            double totalFactor = pricesCompositionWithDelay.Sum(s => s.DaysOfDelay * s.PrincipalAmount * factorReduce); ;
+
+            foreach (var item in pricesCompositionWithDelay)
+            {
+                double itemFactor = item.DaysOfDelay * item.PrincipalAmount * factorReduce;
+                item.InterestAmount = (itemFactor / totalFactor) * totalInterestAmount;
+            }
         }
     }
 }

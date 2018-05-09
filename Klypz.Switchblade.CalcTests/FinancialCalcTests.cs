@@ -29,5 +29,23 @@ namespace Klypz.Switchblade.Calc.Tests
 
             Assert.Fail();
         }
+
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethod]
+        public void ApportionmentOfInterestTest()
+        {
+            List<PriceComposition<int>> comp = new List<PriceComposition<int>>
+            {
+                new PriceComposition<int>(1, 4, 300),
+                new PriceComposition<int>(1, 3, 100),
+                new PriceComposition<int>(1, 2, 200),
+                new PriceComposition<int>(1, 1, 400)
+            };
+
+            FinancialCalc.ApportionmentOfInterestForDaysOfDelay(comp, 100.0);
+
+            var a = comp.Sum(p => p.Amount);
+            
+
+        }
     }
 }
