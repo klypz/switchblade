@@ -6,8 +6,9 @@ namespace Klypz.Switchblade.Calc
     /// <summary>
     /// Fórmulas para cálculos financeiro
     /// </summary>
-    public static class FinancialCalc
+    public static partial class FinancialCalc
     {
+        
         /// <summary>
         /// <para>Obtém o montante através da aplicação de juros simples</para>
         /// <para>M = P*[1+(i*n)]</para>
@@ -16,22 +17,22 @@ namespace Klypz.Switchblade.Calc
         /// <param name="rate">Taxa de juros</param>
         /// <param name="time">Número de períodos</param>
         /// <returns>Montante através de Juros Simples</returns>
-        public static double GetAmountBySimpleInterest(double principal, decimal rate, int time = 1)
+        public static double GetFutureAmountBySimpleInterest(double principal, float rate, int time = 1)
         {
-            return principal * (1 + (Convert.ToDouble(rate) * time));
+            return principal + GetInterestValueBySimpleInterest(principal, rate, time);
         }
 
         /// <summary>
         /// <para>Obtém o valor principal através do montante</para>
         /// <para>P = M/[1+(i*n)]</para>
         /// </summary>
-        /// <param name="amount">Montante</param>
+        /// <param name="futureAmount">Montante</param>
         /// <param name="rate">Taxa de juros</param>
         /// <param name="time">Número de períodos</param>
         /// <returns>Valor principal</returns>
-        public static double GetPrincipalBySimpleInterest(double amount, decimal rate, int time = 1)
+        public static double GetPrincipalBySimpleInterest(double futureAmount, float rate, int time = 1)
         {
-            return amount / (1 + (Convert.ToDouble(rate) * time));
+            return futureAmount / (1 + (Convert.ToDouble(rate) * time));
         }
 
         /// <summary>
@@ -42,9 +43,23 @@ namespace Klypz.Switchblade.Calc
         /// <param name="rate">Taxa de juros</param>
         /// <param name="time">Número de períodos</param>
         /// <returns>Valor do Juros</returns>
-        public static double GetInterestAmountBySimpleInterest(double principal, decimal rate, int time = 1)
+        public static double GetInterestValueBySimpleInterest(double principal, float rate, int time = 1)
         {
             return principal * Convert.ToDouble(rate) * time;
+        }
+
+
+        /// <summary>
+        /// <para>Obtém a taxa de juros através do valor do juros e principal</para>
+        /// <para>J/(P*n)</para>
+        /// </summary>
+        /// <param name="interestAmount">Valor do juros</param>
+        /// <param name="principal">Valor Principal</param>
+        /// <param name="time">Número de períodos</param>
+        /// <returns></returns>
+        public static float GetRateBySimpleInterest(double interestAmount, double principal, int time = 1)
+        {
+            return Convert.ToSingle(interestAmount / (principal * time));
         }
 
         /// <summary>
@@ -55,9 +70,9 @@ namespace Klypz.Switchblade.Calc
         /// <param name="principal">Valor Principal</param>
         /// <param name="time">Número de períodos</param>
         /// <returns></returns>
-        public static decimal GetInterestRateBySimpleInterest(double interestAmount, double principal, int time = 1)
+        public static int GetTimeBySimpleInterest(double interestAmount, double principal, float rate)
         {
-            return Convert.ToDecimal(interestAmount / (principal * time));
+            return Convert.ToInt32(interestAmount / (principal * rate));
         }
 
         /// <summary>
@@ -79,40 +94,13 @@ namespace Klypz.Switchblade.Calc
         }
 
         /// <summary>
-        /// <para>Obtém o valor a ser pago aplicando o desconto (método racional)</para>
-        /// <para>VP = VF/[1+(i*n)]</para>
-        /// </summary>
-        /// <param name="listPrice">Preço Final</param>
-        /// <param name="rate">Taxa de desconto</param>
-        /// <param name="time">Número de período</param>
-        /// <returns>Valor Presente, valor com desconto aplicado</returns>
-        public static double GetAmountByDiscountSimpleRational(double listPrice, decimal rate, int time = 1)
-        {
-            return listPrice / (1 + (Convert.ToDouble(rate) * time));
-        }
-
-        /// <summary>
-        /// <para>Obtém o valor a ser pago aplicando o desconto (método simples ou comercial)</para>
-        /// <para>VP = VF * [1-(i*n)]</para>
-        /// </summary>
-        /// <param name="listPrice">Preço Final</param>
-        /// <param name="rate">Taxa de desconto</param>
-        /// <param name="time">Número de período</param>
-        /// <returns>Valor Presente, valor com desconto aplicado</returns>
-        public static double GetAmountByDiscountSimple(double listPrice, decimal rate, int time = 1)
-        {
-            return listPrice * (1 - (Convert.ToDouble(rate) * time));
-        }
-
-
-        /// <summary>
         /// <para>Realiza o rateio proporcional para composição levando em consideração os dias de atraso e valor principal</para>
         /// <para>Cada item da composição receberá um valor de juros proporcional</para>
         /// </summary>
         /// <typeparam name="T">Tipo de identificador do item da composição do preco</typeparam>
         /// <param name="pricesComposition">Composição do valor.</param>
         /// <param name="totalInterestAmount">Valor total do juros. Este deverá ser rateado entre os itens da composição de valor.</param>
-        public static void ApportionmentOfInterestForDaysOfDelay<T>(IEnumerable<PriceComposition<T>> pricesComposition, double totalInterestAmount) where T : struct
+        public static void ApportionmentOfInterestForDaysOfDelay<T>(IEnumerable<Invoice<T>> pricesComposition, double totalInterestAmount) where T : struct
         {
             double factorReduce = 0.0001;
 
@@ -121,7 +109,7 @@ namespace Klypz.Switchblade.Calc
                 throw new ArgumentNullException(nameof(pricesComposition));
             }
 
-            IEnumerable<PriceComposition<T>> pricesCompositionWithDelay = pricesComposition.Where(p => p.DaysOfDelay > 0);
+            IEnumerable<Invoice<T>> pricesCompositionWithDelay = pricesComposition.Where(p => p.DaysOfDelay > 0);
 
             double totalAmount = pricesCompositionWithDelay.Sum(s => s.PrincipalAmount);
             double totalDaysOfDelay = pricesCompositionWithDelay.Sum(s => s.DaysOfDelay);
