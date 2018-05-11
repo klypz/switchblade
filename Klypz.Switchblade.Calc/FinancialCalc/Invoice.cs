@@ -1,4 +1,6 @@
-﻿namespace Klypz.Switchblade.Calc
+﻿using Klypz.Switchblade.Calc.Financial;
+
+namespace Klypz.Switchblade.Calc
 {
     public class Invoice<T> where T : struct
     {
@@ -39,7 +41,7 @@
         {
             get
             {
-                return InterestAmount.HasValue ? FinancialCalc.GetRateBySimpleInterest(InterestAmount.Value, PrincipalAmount, DaysOfDelay) : 0;
+                return InterestAmount.HasValue ? SimpleInterest.GetRate(InterestAmount.Value, PrincipalAmount, DaysOfDelay) : 0;
             }
         }
 

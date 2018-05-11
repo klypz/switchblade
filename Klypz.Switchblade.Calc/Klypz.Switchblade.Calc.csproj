@@ -40,14 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FinancialCalc.CompountInterest.cs" />
-    <Compile Include="FinancialCalc.CompoundDiscount.cs" />
-    <Compile Include="FinancialCalc.PriceSystem.cs" />
-    <Compile Include="FinancialCalc.SimpleDiscount.cs" />
-    <Compile Include="FinancialCalc.SimpleInterest.cs" />
-    <Compile Include="Invoice.cs" />
+    <Compile Include="FinancialCalc\CompountInterest.cs" />
+    <Compile Include="FinancialCalc\CompoundDiscount.cs" />
+    <Compile Include="FinancialCalc\PriceSystem.cs" />
+    <Compile Include="FinancialCalc\SimpleDiscount.cs" />
+    <Compile Include="FinancialCalc\SimpleInterest.cs" />
+    <Compile Include="FinancialCalc\Invoice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RatePeriod.cs" />
+    <Compile Include="FinancialCalc\RatePeriod.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

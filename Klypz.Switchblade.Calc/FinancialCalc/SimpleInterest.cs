@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-namespace Klypz.Switchblade.Calc
+
+
+namespace Klypz.Switchblade.Calc.Financial
 {
     /// <summary>
     /// Fórmulas para cálculos financeiro
     /// </summary>
-    public static partial class FinancialCalc
+    public static class SimpleInterest
     {
         
         /// <summary>
@@ -17,9 +19,9 @@ namespace Klypz.Switchblade.Calc
         /// <param name="rate">Taxa de juros</param>
         /// <param name="time">Número de períodos</param>
         /// <returns>Montante através de Juros Simples</returns>
-        public static double GetFutureAmountBySimpleInterest(double principal, float rate, int time = 1)
+        public static double GetFutureAmount(double principal, float rate, int time = 1)
         {
-            return principal + GetInterestValueBySimpleInterest(principal, rate, time);
+            return principal + GetInterestValue(principal, rate, time);
         }
 
         /// <summary>
@@ -30,7 +32,7 @@ namespace Klypz.Switchblade.Calc
         /// <param name="rate">Taxa de juros</param>
         /// <param name="time">Número de períodos</param>
         /// <returns>Valor principal</returns>
-        public static double GetPrincipalBySimpleInterest(double futureAmount, float rate, int time = 1)
+        public static double GetPrincipal(double futureAmount, float rate, int time = 1)
         {
             return futureAmount / (1 + (Convert.ToDouble(rate) * time));
         }
@@ -43,7 +45,7 @@ namespace Klypz.Switchblade.Calc
         /// <param name="rate">Taxa de juros</param>
         /// <param name="time">Número de períodos</param>
         /// <returns>Valor do Juros</returns>
-        public static double GetInterestValueBySimpleInterest(double principal, float rate, int time = 1)
+        public static double GetInterestValue(double principal, float rate, int time = 1)
         {
             return principal * Convert.ToDouble(rate) * time;
         }
@@ -57,7 +59,7 @@ namespace Klypz.Switchblade.Calc
         /// <param name="principal">Valor Principal</param>
         /// <param name="time">Número de períodos</param>
         /// <returns></returns>
-        public static float GetRateBySimpleInterest(double interestAmount, double principal, int time = 1)
+        public static float GetRate(double interestAmount, double principal, int time = 1)
         {
             return Convert.ToSingle(interestAmount / (principal * time));
         }
@@ -70,7 +72,7 @@ namespace Klypz.Switchblade.Calc
         /// <param name="principal">Valor Principal</param>
         /// <param name="time">Número de períodos</param>
         /// <returns></returns>
-        public static int GetTimeBySimpleInterest(double interestAmount, double principal, float rate)
+        public static int GetTime(double interestAmount, double principal, float rate)
         {
             return Convert.ToInt32(interestAmount / (principal * rate));
         }

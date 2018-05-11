@@ -1,4 +1,4 @@
-﻿namespace Klypz.Switchblade.Calc
+﻿namespace Klypz.Switchblade.Calc.Financial
 {
     public enum RatePeriod
     {
