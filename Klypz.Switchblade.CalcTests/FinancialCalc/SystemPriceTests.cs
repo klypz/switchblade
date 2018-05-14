@@ -14,11 +14,14 @@ namespace Klypz.Switchblade.Calc.Financial.Tests
         [TestMethod()]
         public void GetMonthlyInstallmentsTest()
         {
-            double d = 95000;
+            double d = 35000;
             float t = 3.4f / 100;
             int n = 260;
 
-            double vf = Math.Round(SystemPrice.GetMonthlyInstallments(d, t, n), 2);
+            var tx = SystemPrice.GetRate(35000, 998.60, 48);
+            SystemPriceTable priceTable = new SystemPriceTable(35000, tx, 48);
+            var a = priceTable.ToList();
+            double vf = Math.Round(SystemPrice.GetInstallments(d, t, n), 2);
 
             double test  = SystemPrice.GetPresentValue(vf, t, n);
 
