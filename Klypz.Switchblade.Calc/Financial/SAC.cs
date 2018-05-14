@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Klypz.Switchblade.Calc.Financial
 {
-    public static class SAC
+    internal static class SAC
     {
         public static double GetAmortization(double debt, int time)
         {
