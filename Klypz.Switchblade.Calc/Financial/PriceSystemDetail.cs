@@ -1,6 +1,7 @@
-﻿namespace Klypz.Switchblade.Calc.Financial
+﻿using System;
+namespace Klypz.Switchblade.Calc.Financial
 {
-    internal class PriceSystemDetail
+    public class PriceSystemDetail
     {
         public PriceSystemDetail(int position, double currentBalance, double interest, double amortisation)
         {
@@ -15,7 +16,5 @@
         public double Amortisation { get; set; }
         public double Interest { get; set; }
         public double Balance { get { return CurrentBalance - Amortisation; } }
-
-
     }
 }

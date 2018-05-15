@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-
 namespace Klypz.Switchblade.Calc.Financial
 {
-    internal class PriceSystemTable : IEnumerable<PriceSystemDetail>, IEnumerator<PriceSystemDetail>
+    public class PriceSystemTable : IEnumerable<PriceSystemDetail>, IEnumerator<PriceSystemDetail>
     {
         public double Principal { get; set; }
         public float Rate { get; set; }
@@ -12,7 +11,7 @@ namespace Klypz.Switchblade.Calc.Financial
         public int Precision { get; set; }
         public double Installment { get; set; }
 
-        private int index = 0;
+        private int index = -1;
 
         private PriceSystemDetail[] result = null;
 
@@ -28,8 +27,8 @@ namespace Klypz.Switchblade.Calc.Financial
             Precision = precision;
             Installment = PriceSystem.GetInstallments(principal, rate, time, precision);
 
-            index = 0;
             result = new PriceSystemDetail[Time];
+            Reset();
         }
 
         public IEnumerator<PriceSystemDetail> GetEnumerator()
@@ -39,7 +38,9 @@ namespace Klypz.Switchblade.Calc.Financial
                 for (int i = 0; i < Time; i++)
                 {
                     double crrBal = i == 0 ? Principal : result[i - 1].Balance;
-                    result[i] = new PriceSystemDetail(i + 1, crrBal, crrBal * Rate, Math.Abs(Installment - Installment * Rate));
+                    double interest = Math.Round(crrBal * Rate, 2);
+
+                    result[i] = new PriceSystemDetail(i + 1, crrBal, interest, Math.Round(Math.Abs(Installment - interest), 2, MidpointRounding.AwayFromZero));
                 }
             }
 
@@ -58,18 +59,18 @@ namespace Klypz.Switchblade.Calc.Financial
 
         public bool MoveNext()
         {
-            if (index == Time - 1)
+            if (index == Time)
                 return false;
             else
                 index++;
 
-            return index < Time - 1;
+            return index < Time;
 
         }
 
         public void Reset()
         {
-            index = 0;
+            index = -1;
         }
     }
 }

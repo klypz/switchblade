@@ -7,7 +7,7 @@ namespace Klypz.Switchblade.Calc.Financial
     {
         public static double GetInstallments(double principal, float rate, int time, int precision = 2)
         {
-            return principal * ((Math.Pow(1 + rate, time) * rate) / (Math.Pow(1 + rate, time) - 1));
+            return Math.Round(principal * ((Math.Pow(1 + rate, time) * rate) / (Math.Pow(1 + rate, time) - 1)), precision);
         }
 
         public static double GetPresentValue(double monthlyInstallment, float rate, int time)
@@ -31,12 +31,12 @@ namespace Klypz.Switchblade.Calc.Financial
 
         public static double GetInterest(double principal, float rate, int time, int precision = 2)
         {
-            return GetInstallments(principal, rate, time, 2) * time - principal;
+            return Math.Round(GetInstallments(principal, rate, time, 2) * time - principal, precision);
         }
 
         public static double GetAmount(double principal, float rate, int time, int precision = 2)
         {
-            return Math.Round(GetInstallments(principal, rate, time)) * time;
+            return Math.Round(GetInstallments(principal, rate, time), precision) * time;
         }
 
         public static double GetCurrentBalance(double principal, float rate, int time, int timeCurrent, int precision = 2)
@@ -59,7 +59,7 @@ namespace Klypz.Switchblade.Calc.Financial
 
         public static double GetAccumulatedAmortisation(double principal, float rate, int time, int timeCurrent, int precision = 2)
         {
-            return principal - GetCurrentBalance(principal, rate, time, timeCurrent, precision);
+            return Math.Round(principal - GetCurrentBalance(principal, rate, time, timeCurrent, precision), precision);
         }
     }
 }

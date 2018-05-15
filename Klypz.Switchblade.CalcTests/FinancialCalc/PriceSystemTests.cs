@@ -32,5 +32,18 @@ namespace Klypz.Switchblade.Calc.Financial.Tests
             //var l = SAC.GetInstallmentsX(d / n, (n - 1 + 1) * t * (d / n));
             //Assert.Fail();
         }
+
+        [TestMethod()]
+        public void PriceTable()
+        {
+            double d = 35000;
+            float t = 3.4f / 100;
+            int n = 260;
+
+            PriceSystemTable a = new PriceSystemTable(d, t, n);
+            var a2 = a.ToList();
+
+            a2.Sum(p => p.Amortisation);
+        }
     }
 }
