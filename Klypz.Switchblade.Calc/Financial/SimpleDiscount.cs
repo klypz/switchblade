@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Klypz.Switchblade.Calc.Financial
 {
+    /// <summary>
+    /// Desconto Simples
+    /// </summary>
     public static class SimpleDiscount
     {
         #region Desconto Simples Racional
