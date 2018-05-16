@@ -5,9 +5,9 @@ namespace Klypz.Switchblade.Calc.Financial
 {
     public static partial class PriceSystem
     {
-        public static double GetInstallments(double principal, float rate, int time, int precision = 2)
+        public static double GetInstallments(double principal, float rate, int time)
         {
-            return Math.Round(principal * ((Math.Pow(1 + rate, time) * rate) / (Math.Pow(1 + rate, time) - 1)), precision);
+            return principal * ((Math.Pow(1 + rate, time) * rate) / (Math.Pow(1 + rate, time) - 1));
         }
 
         public static double GetPresentValue(double monthlyInstallment, float rate, int time)
@@ -29,19 +29,19 @@ namespace Klypz.Switchblade.Calc.Financial
             return result - 0.000001f;
         }
 
-        public static double GetInterest(double principal, float rate, int time, int precision = 2)
+        public static double GetInterest(double principal, float rate, int time)
         {
-            return Math.Round(GetInstallments(principal, rate, time, 2) * time - principal, precision);
+            return GetInstallments(principal, rate, time) * time - principal;
         }
 
-        public static double GetAmount(double principal, float rate, int time, int precision = 2)
+        public static double GetAmount(double principal, float rate, int time)
         {
-            return Math.Round(GetInstallments(principal, rate, time), precision) * time;
+            return GetInstallments(principal, rate, time) * time;
         }
 
-        public static double GetCurrentBalance(double principal, float rate, int time, int timeCurrent, int precision = 2)
+        public static double GetCurrentBalance(double principal, float rate, int time, int timeCurrent)
         {
-            double installment = GetInstallments(principal, rate, time, precision);
+            double installment = GetInstallments(principal, rate, time);
             double balance = principal;
 
             Func<double, float, double, double> funcTimeAcc = delegate (double p, float t, double inst)
@@ -54,12 +54,12 @@ namespace Klypz.Switchblade.Calc.Financial
                 balance -= funcTimeAcc(balance, rate, installment);
             }
 
-            return Math.Round(balance, precision);
+            return balance;
         }
 
-        public static double GetAccumulatedAmortisation(double principal, float rate, int time, int timeCurrent, int precision = 2)
+        public static double GetAccumulatedAmortisation(double principal, float rate, int time, int timeCurrent)
         {
-            return Math.Round(principal - GetCurrentBalance(principal, rate, time, timeCurrent, precision), precision);
+            return principal - GetCurrentBalance(principal, rate, time, timeCurrent);
         }
     }
 }

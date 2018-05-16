@@ -2,6 +2,10 @@
 
 namespace Klypz.Switchblade.Calc
 {
+    /// <summary>
+    /// Fatura utilizada no cálculo de rateio de juros por atraso
+    /// </summary>
+    /// <typeparam name="T">Tipo de objeto para identificação do registro. (Id, Isn, Guid...)</typeparam>
     public class Invoice<T> where T : struct
     {
         /// <summary>
@@ -17,12 +21,12 @@ namespace Klypz.Switchblade.Calc
         /// <summary>
         /// Valor Principal do documento
         /// </summary>
-        public double PrincipalAmount { get; private set; }
+        public double PrincipalValue { get; private set; }
 
         /// <summary>
         /// Valor do Juros (disponibilizado após Cálculo)
         /// </summary>
-        public double? InterestAmount { get; internal set; }
+        public double? Interest { get; internal set; }
 
         /// <summary>
         /// Valor Principal + Valor do Juros
@@ -31,25 +35,25 @@ namespace Klypz.Switchblade.Calc
         {
             get
             {
-                return PrincipalAmount + (InterestAmount ?? 0);
+                return PrincipalValue + (Interest ?? 0);
             }
         }
         /// <summary>
         /// Taxa de juros ao dia
         /// </summary>
-        public float InterestRate
+        public float Rate
         {
             get
             {
-                return InterestAmount.HasValue ? SimpleInterest.GetRate(InterestAmount.Value, PrincipalAmount, DaysOfDelay) : 0;
+                return Interest.HasValue ? SimpleInterest.GetRate(Interest.Value, PrincipalValue, DaysOfDelay) : 0;
             }
         }
 
-        public Invoice(T id, int daysOfDelay, double principalAmount)
+        public Invoice(T id, int daysOfDelay, double principalValue)
         {
             Id = id;
             DaysOfDelay = daysOfDelay;
-            PrincipalAmount = principalAmount;
+            PrincipalValue = principalValue;
         }
     }
 }

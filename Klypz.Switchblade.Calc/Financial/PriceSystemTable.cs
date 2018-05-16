@@ -3,13 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 namespace Klypz.Switchblade.Calc.Financial
 {
+    /// <summary>
+    /// <para>Tabela Price</para>
+    /// <para>Os valores residuais serão abatidas no juros da ultima parcela</para>
+    /// </summary>
     public class PriceSystemTable : IEnumerable<PriceSystemDetail>, IEnumerator<PriceSystemDetail>
     {
-        public double Principal { get; set; }
-        public float Rate { get; set; }
-        public int Time { get; set; }
-        public int Precision { get; set; }
-        public double Installment { get; set; }
+        /// <summary>
+        /// Valor Principal (Valor Financiado)
+        /// </summary>
+        public double Principal { get; private set; }
+        /// <summary>
+        /// Taxa de Juros
+        /// </summary>
+        public float Rate { get; private set; }
+        /// <summary>
+        /// Quantidade de parcelas
+        /// </summary>
+        public int Time { get; private set; }
+        /// <summary>
+        /// Número de casas decimais
+        /// </summary>
+        public int Precision { get; private set; }
+        /// <summary>
+        /// Valor da Parcela
+        /// </summary>
+        public double Installment { get; private set; }
 
         private int index = -1;
 
@@ -19,13 +38,17 @@ namespace Klypz.Switchblade.Calc.Financial
 
         object IEnumerator.Current => result[index];
 
+        /// <param name="principal">Valor Principal (Valor Financiado)</param>
+        /// <param name="rate">Taxa de Juros</param>
+        /// <param name="time">Quantidade de parcelas</param>
+        /// <param name="precision">Número de casa decimais</param>
         public PriceSystemTable(double principal, float rate, int time, int precision = 2)
         {
             Principal = principal;
             Rate = rate;
             Time = time;
             Precision = precision;
-            Installment = PriceSystem.GetInstallments(principal, rate, time, precision);
+            Installment = Math.Round(PriceSystem.GetInstallments(principal, rate, time), precision);
 
             result = new PriceSystemDetail[Time];
             Reset();
@@ -38,9 +61,16 @@ namespace Klypz.Switchblade.Calc.Financial
                 for (int i = 0; i < Time; i++)
                 {
                     double crrBal = i == 0 ? Principal : result[i - 1].Balance;
-                    double interest = Math.Round(crrBal * Rate, 2);
+                    double interest = Math.Round(crrBal * Rate, Precision);
 
-                    result[i] = new PriceSystemDetail(i + 1, crrBal, interest, Math.Round(Math.Abs(Installment - interest), 2, MidpointRounding.AwayFromZero));
+                    result[i] = new PriceSystemDetail(i + 1, crrBal, interest, Math.Round(Math.Abs(Installment - interest), Precision));
+
+                    if (i == Time - 1 && result[i].Balance != 0)
+                    {
+                        interest -= result[i].Balance;
+                        result[i].Interest = interest;
+                        result[i].Amortisation = Math.Round(Math.Abs(Installment - interest), Precision);
+                    }
                 }
             }
 

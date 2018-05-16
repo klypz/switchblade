@@ -43,6 +43,9 @@
   <ItemGroup>
     <Compile Include="Financial\CompountInterest.cs" />
     <Compile Include="Financial\CompoundDiscount.cs" />
+    <Compile Include="Financial\PriceSystem.cs" />
+    <Compile Include="Financial\PriceSystemDetail.cs" />
+    <Compile Include="Financial\PriceSystemTable.cs" />
     <Compile Include="Financial\SimpleDiscount.cs" />
     <Compile Include="Financial\SimpleInterest.cs" />
     <Compile Include="Financial\Invoice.cs" />

@@ -5,7 +5,7 @@ namespace Klypz.Switchblade.Calc.Financial
     /// <summary>
     /// <para>Desconto Composto</para>
     /// </summary>
-    public static partial class CompoundDiscount
+    public static class CompoundDiscount
     {
         #region Desconto Composto Racional
         /// <summary>
@@ -42,7 +42,7 @@ namespace Klypz.Switchblade.Calc.Financial
         /// <param name="rate">Taxa de desconto</param>
         /// <param name="time">Número de períodos do desconto. "n"</param>
         /// <returns>Valor do Desconto [Desconto Composto Racional]</returns>
-        public static double GetDicountValueRational(double futureValue, float rate, int time = 1)
+        public static double GetDiscountRational(double futureValue, float rate, int time = 1)
         {
             return futureValue - GetPresentValueRational(futureValue, rate, time);
         }
@@ -108,9 +108,9 @@ namespace Klypz.Switchblade.Calc.Financial
         /// <param name="rate">Taxa de desconto</param>
         /// <param name="time">Número de períodos do desconto. "n"</param>
         /// <returns>Valor do Desconto [Desconto Composto]</returns>
-        public static double GetDicountValue(double futureValue, float rate, int time = 1)
+        public static double GetDiscount(double futureValue, float rate, int time = 1)
         {
-            return futureValue - GetPresentValue(futureValue, rate, time);
+            return futureValue * (1 - Math.Pow(1 - rate, time));
         }
 
         /// <summary>

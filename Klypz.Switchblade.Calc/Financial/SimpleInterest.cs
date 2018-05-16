@@ -6,88 +6,80 @@ using System.Linq;
 namespace Klypz.Switchblade.Calc.Financial
 {
     /// <summary>
-    /// Fórmulas para cálculos financeiro
+    /// Cálculos de juros simples
     /// </summary>
     public static class SimpleInterest
     {
-        
         /// <summary>
-        /// <para>Obtém o montante através da aplicação de juros simples</para>
-        /// <para>M = P*[1+(i*n)]</para>
+        /// Obtém o valor do Juros
         /// </summary>
-        /// <param name="principal">Valor principal</param>
-        /// <param name="rate">Taxa de juros</param>
-        /// <param name="time">Número de períodos</param>
-        /// <returns>Montante através de Juros Simples</returns>
-        public static double GetFutureAmount(double principal, float rate, int time = 1)
-        {
-            return principal + GetInterestValue(principal, rate, time);
-        }
-
-        /// <summary>
-        /// <para>Obtém o valor principal através do montante</para>
-        /// <para>P = M/[1+(i*n)]</para>
-        /// </summary>
-        /// <param name="futureAmount">Montante</param>
-        /// <param name="rate">Taxa de juros</param>
-        /// <param name="time">Número de períodos</param>
-        /// <returns>Valor principal</returns>
-        public static double GetPrincipal(double futureAmount, float rate, int time = 1)
-        {
-            return futureAmount / (1 + (Convert.ToDouble(rate) * time));
-        }
-
-        /// <summary>
-        /// <para>Obtém o Valor do juros através do Juros Simples</para>
-        /// <para>J = P * i * n</para>
-        /// </summary>
-        /// <param name="principal">Valor Principal</param>
-        /// <param name="rate">Taxa de juros</param>
-        /// <param name="time">Número de períodos</param>
+        /// <param name="principalValue">Valor Principal</param>
+        /// <param name="rate">Taxa de Juros</param>
+        /// <param name="time">Número de repetições</param>
         /// <returns>Valor do Juros</returns>
-        public static double GetInterestValue(double principal, float rate, int time = 1)
+        public static double GetInterest(double principalValue, float rate, int time = 1)
         {
-            return principal * Convert.ToDouble(rate) * time;
+            return principalValue * Convert.ToDouble(rate) * time;
         }
 
+        /// <summary>
+        /// Obtém o montante Futuro
+        /// </summary>
+        /// <param name="principalValue">Valor Principal</param>
+        /// <param name="rate">Taxa de Juros</param>
+        /// <param name="time">Número de repetições</param>
+        /// <returns>Valor Futuro (Montante)</returns>
+        public static double GetAmount(double principalValue, float rate, int time = 1)
+        {
+            return principalValue * (1 + (rate * time));
+        }
 
         /// <summary>
-        /// <para>Obtém a taxa de juros através do valor do juros e principal</para>
-        /// <para>J/(P*n)</para>
+        /// Obtém o valor principal a partir do juros
         /// </summary>
-        /// <param name="interestAmount">Valor do juros</param>
-        /// <param name="principal">Valor Principal</param>
-        /// <param name="time">Número de períodos</param>
+        /// <param name="amount">Valor Futuro</param>
+        /// <param name="rate">Taxa de Juros</param>
+        /// <param name="time">Número de repetições</param>
+        /// <returns>Obtém o valor principalValue</returns>
+        public static double GetPrincipal(double amount, float rate, int time = 1)
+        {
+            return amount / (1 + (Convert.ToDouble(rate) * time));
+        }
+
+        /// <summary>
+        /// Obtém Taxa de Juros
+        /// </summary>
+        /// <param name="interest">Juros (Valor)</param>
+        /// <param name="principalValue">Valor Principal</param>
+        /// <param name="time">Número de repetições</param>
+        /// <returns>Taxa de Juros</returns>
+        public static float GetRate(double interest, double principalValue, int time = 1)
+        {
+            return Convert.ToSingle(interest / (principalValue * time));
+        }
+
+        /// <summary>
+        /// Obtém o número de repetições
+        /// </summary>
+        /// <param name="interest">Juros (Valor)</param>
+        /// <param name="principalValue">Valor Principal</param>
+        /// <param name="rate">Taxa de Juros</param>
+        /// <returns>Número de Repetições</returns>
+        public static int GetTime(double interest, double principalValue, float rate)
+        {
+            return Convert.ToInt32(interest / (principalValue * rate));
+        }
+
+        /// <summary>
+        /// Equivalências de taxas por período
+        /// </summary>
+        /// <param name="input">Taxa Informada</param>
+        /// <param name="ratePeriodFrom">Define o tipo de entrada</param>
+        /// <param name="ratePeriodTo">Define o tipo de saída</param>
         /// <returns></returns>
-        public static float GetRate(double interestAmount, double principal, int time = 1)
+        public static float GetEquivalentRate(float input, RatePeriod ratePeriodFrom, RatePeriod ratePeriodTo)
         {
-            return Convert.ToSingle(interestAmount / (principal * time));
-        }
-
-        /// <summary>
-        /// <para>Obtém a taxa de juros através do valor do juros e principal</para>
-        /// <para>J/(P*n)</para>
-        /// </summary>
-        /// <param name="interestAmount">Valor do juros</param>
-        /// <param name="principal">Valor Principal</param>
-        /// <param name="time">Número de períodos</param>
-        /// <returns></returns>
-        public static int GetTime(double interestAmount, double principal, float rate)
-        {
-            return Convert.ToInt32(interestAmount / (principal * rate));
-        }
-
-        /// <summary>
-        /// <para>Converte o período da taxa de juros</para>
-        /// <para>10% a.m. = 120% a.a. = 0,333% a.d.</para>
-        /// </summary>
-        /// <param name="input">Taxa de juros</param>
-        /// <param name="ratePeriodFrom">Período de entrada (input)</param>
-        /// <param name="ratePeriodTo">Período de saída</param>
-        /// <returns>Taxa de juros convertida para o período de saída</returns>
-        public static decimal GetEquivalentRateSimple(decimal input, RatePeriod ratePeriodFrom, RatePeriod ratePeriodTo)
-        {
-            Func<decimal, decimal> returnTo = delegate (decimal convertDay)
+            Func<float, float> returnTo = delegate (float convertDay)
             {
                 return convertDay * (int)(ratePeriodTo);
             };
@@ -96,31 +88,28 @@ namespace Klypz.Switchblade.Calc.Financial
         }
 
         /// <summary>
-        /// <para>Realiza o rateio proporcional para composição levando em consideração os dias de atraso e valor principal</para>
-        /// <para>Cada item da composição receberá um valor de juros proporcional</para>
+        /// Rateio proporcional de juros por dia de atraso
         /// </summary>
-        /// <typeparam name="T">Tipo de identificador do item da composição do preco</typeparam>
-        /// <param name="pricesComposition">Composição do valor.</param>
-        /// <param name="totalInterestAmount">Valor total do juros. Este deverá ser rateado entre os itens da composição de valor.</param>
-        public static void ApportionmentOfInterestForDaysOfDelay<T>(IEnumerable<Invoice<T>> pricesComposition, double totalInterestAmount) where T : struct
+        /// <typeparam name="T">Tipo de objeto para identificação do registro. (Id, Isn, Guid...)</typeparam>
+        /// <param name="invoices">Faturas em atraso</param>
+        /// <param name="interest">Juros a ser rateado entre as faturas em atraso</param>
+        public static void ApportionmentOfInterest<T>(IEnumerable<Invoice<T>> invoices, double interest, int precision = 2) where T : struct
         {
             double factorReduce = 0.0001;
 
-            if (pricesComposition == null)
+            if (invoices == null)
             {
-                throw new ArgumentNullException(nameof(pricesComposition));
+                throw new ArgumentNullException(nameof(invoices));
             }
 
-            IEnumerable<Invoice<T>> pricesCompositionWithDelay = pricesComposition.Where(p => p.DaysOfDelay > 0);
+            IEnumerable<Invoice<T>> lateInvoices = invoices.Where(p => p.DaysOfDelay > 0);
 
-            double totalAmount = pricesCompositionWithDelay.Sum(s => s.PrincipalAmount);
-            double totalDaysOfDelay = pricesCompositionWithDelay.Sum(s => s.DaysOfDelay);
-            double totalFactor = pricesCompositionWithDelay.Sum(s => s.DaysOfDelay * s.PrincipalAmount * factorReduce); ;
+            double totalFactor = lateInvoices.Sum(s => s.DaysOfDelay * s.PrincipalValue * factorReduce); ;
 
-            foreach (var item in pricesCompositionWithDelay)
+            foreach (var item in lateInvoices)
             {
-                double itemFactor = item.DaysOfDelay * item.PrincipalAmount * factorReduce;
-                item.InterestAmount = (itemFactor / totalFactor) * totalInterestAmount;
+                double itemFactor = item.DaysOfDelay * item.PrincipalValue * factorReduce;
+                item.Interest = (itemFactor / totalFactor) * interest;
             }
         }
     }

@@ -1,74 +1,70 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Klypz.Switchblade.Calc.Financial
 {
     /// <summary>
     /// Cálculos de juros composto
     /// </summary>
-    public static partial class CompoundInterest
+    public static class CompoundInterest
     {
         /// <summary>
         /// Obtém o valor do Juros
         /// </summary>
-        /// <param name="principal">Valor Principal</param>
+        /// <param name="principalValue">Valor Principal</param>
         /// <param name="rate">Taxa de Juros</param>
         /// <param name="time">Número de repetições</param>
         /// <returns>Valor do Juros</returns>
-        public static double GetInterestValue(double principal, float rate, int time = 1)
+        public static double GetInterest(double principalValue, float rate, int time = 1)
         {
-            return GetFutureAmount(principal, rate, time) - principal;
+            return GetAmount(principalValue, rate, time) - principalValue;
         }
 
         /// <summary>
         /// Obtém o montante Futuro
         /// </summary>
-        /// <param name="principal">Valor Principal</param>
+        /// <param name="principalValue">Valor Principal</param>
         /// <param name="rate">Taxa de Juros</param>
         /// <param name="time">Número de repetições</param>
         /// <returns>Valor Futuro (Montante)</returns>
-        public static double GetFutureAmount(double principal, float rate, int time = 1)
+        public static double GetAmount(double principalValue, float rate, int time = 1)
         {
-            return principal * Math.Pow(1.0 + Convert.ToDouble(rate), time);
+            return principalValue * Math.Pow(1.0 + Convert.ToDouble(rate), time);
         }
 
         /// <summary>
         /// Obtém o valor principal a partir do juros
         /// </summary>
-        /// <param name="futureAmount">Valor Futuro</param>
+        /// <param name="amount">Valor Futuro</param>
         /// <param name="rate">Taxa de Juros</param>
         /// <param name="time">Número de repetições</param>
-        /// <returns>Obtém o valor principal</returns>
-        public static double GetPrincipal(double futureAmount, float rate, int time = 1)
+        /// <returns>Obtém o valor principalValue</returns>
+        public static double GetPrincipal(double amount, float rate, int time = 1)
         {
-            return futureAmount / Math.Pow(1.0 + Convert.ToDouble(rate), time);
+            return amount / Math.Pow(1.0 + Convert.ToDouble(rate), time);
         }
 
         /// <summary>
         /// Obtém Taxa de Juros
         /// </summary>
-        /// <param name="futureAmount">Valor Futuro</param>
-        /// <param name="principal">Valor Principal</param>
+        /// <param name="amount">Valor Futuro</param>
+        /// <param name="principalValue">Valor Principal</param>
         /// <param name="time">Número de repetições</param>
         /// <returns>Taxa de Juros</returns>
-        public static float GetRate(double futureAmount, double principal, int time = 1)
+        public static float GetRate(double amount, double principalValue, int time = 1)
         {
-            return Convert.ToSingle(Math.Pow(futureAmount / principal, 1.0 / time) - 1);
-            //return Convert.ToSingle(Math.Log(futureAmount / principal) / time);
+            return Convert.ToSingle(Math.Pow(amount / principalValue, 1.0 / time) - 1);
         }
 
         /// <summary>
         /// Obtém o número de repetições
         /// </summary>
-        /// <param name="futureAmount">Valor Futuro</param>
-        /// <param name="principal">Valor Principal</param>
+        /// <param name="amount">Valor Futuro</param>
+        /// <param name="principalValue">Valor Principal</param>
         /// <param name="rate">Taxa de Juros</param>
         /// <returns>Número de Repetições</returns>
-        public static int GetTime(double futureAmount, double principal, float rate)
+        public static int GetTime(double amount, double principalValue, float rate)
         {
-            return Convert.ToInt32(Math.Log(futureAmount / principal) / rate);
+            return Convert.ToInt32(Math.Log(amount / principalValue) / rate);
         }
 
         /// <summary>

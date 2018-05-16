@@ -78,7 +78,8 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="Financial\CompoundDiscountTests.cs" />
+    <Compile Include="Financial\InterestTests.cs" />
+    <Compile Include="Financial\PriceSystemTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
