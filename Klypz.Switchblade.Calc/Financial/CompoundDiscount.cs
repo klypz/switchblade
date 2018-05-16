@@ -5,7 +5,7 @@ namespace Klypz.Switchblade.Calc.Financial
     /// <summary>
     /// <para>Desconto Composto</para>
     /// </summary>
-    public static class CompoundDiscount
+    public static class CompoundDiscount 
     {
         #region Desconto Composto Racional
         /// <summary>
