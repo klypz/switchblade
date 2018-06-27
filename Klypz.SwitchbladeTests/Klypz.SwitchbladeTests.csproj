@@ -72,6 +72,7 @@
     <Compile Include="Cryptography\HashStringTests.cs" />
     <Compile Include="Cryptography\SymmetricEncryptTests.cs" />
     <Compile Include="Extensions\DateTimeExtensionTests.cs" />
+    <Compile Include="Extensions\EnumExtensionTests.cs" />
     <Compile Include="Extensions\StringExtensionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\ApplySaltTests.cs" />

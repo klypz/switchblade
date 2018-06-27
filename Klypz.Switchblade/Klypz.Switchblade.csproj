@@ -58,7 +58,9 @@
     <Compile Include="Base64\MimeType.cs" />
     <Compile Include="Cryptography\NamespaceDoc.cs" />
     <Compile Include="Extensions\DateTimeExtension.cs" />
+    <Compile Include="Extensions\EnumDescriptionAttribute.cs" />
     <Compile Include="Extensions\EnumerableExtension.cs" />
+    <Compile Include="Extensions\EnumHelper.cs" />
     <Compile Include="Extensions\NamespaceDoc.cs" />
     <Compile Include="Utility\NamespaceDoc.cs" />
     <Compile Include="Utility\PasswordGenerator.cs" />
