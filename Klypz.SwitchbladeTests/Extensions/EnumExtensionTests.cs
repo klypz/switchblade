@@ -24,11 +24,11 @@ namespace Klypz.Switchblade.Extensions.Tests
         public void TryParseValueTest()
         {
 
-            if (EnumExtension.TryParseValue(2, out E? result))
+            if (EnumHelper.TryParseValue(2, out E? result))
             {
-                string desc = EnumExtension.GetDescription(result.Value);
+                string desc = EnumHelper.GetDescription(result.Value);
             }
-            string desc3 = EnumExtension.GetDescription(E.Enum3) ?? "";
+            string desc3 = EnumHelper.GetDescription(E.Enum3) ?? "";
 
             Assert.Fail();
         }
